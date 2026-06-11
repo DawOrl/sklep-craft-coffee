@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Craft Coffee ☕
 
-## Getting Started
+Sklep internetowy rzemieślniczej palarni kawy specialty — projekt demonstracyjny
+e-commerce zbudowany na Next.js 16, z naciskiem na dopracowany design
+(„Dark Roast Editorial") i zaawansowane animacje.
 
-First, run the development server:
+> **Demo portfolio** — produkty, palarnia i zamówienia są fikcyjne.
+> Płatności działają w trybie mock (integracja Stripe przygotowana do podpięcia).
+
+## Problem i rozwiązanie
+
+Małe lokalne marki (palarnie kawy, rękodzieło, produkty regionalne) często
+sprzedają wyłącznie stacjonarnie lub przez wiadomości w social mediach — tracą
+sprzedaż poza godzinami otwarcia. Ten projekt pokazuje lekki sklep internetowy,
+który rozwiązuje ten problem: katalog z filtrowaniem, koszyk, proces zamówienia
+i fundament pod płatności online — sprzedaż 24/7 bez angażowania właściciela.
+
+## Funkcje
+
+- **Strona główna** — hero z interaktywnym polem ziaren kawy 3D, sekcja
+  bestsellerów, przypinane scroll-storytelling „Od ziarna do filiżanki",
+  animowane liczniki
+- **Katalog** (`/sklep`) — filtry (palenie, rodzaj, mielenie) i sortowanie
+  synchronizowane z URL (linki do udostępniania), szybkie dodawanie do koszyka
+- **Karta produktu** (`/sklep/[slug]`) — warianty (250 g / 1 kg, stopień
+  zmielenia), akordeony, podobne kawy, dane strukturalne JSON-LD, SSG
+- **Koszyk** — szufladka + pełny widok, zapis w `localStorage`, pasek postępu
+  darmowej dostawy
+- **Zamówienie** — formularz z walidacją po polsku, podsumowanie, strona
+  sukcesu; `createOrder` w [`src/lib/checkout.ts`](src/lib/checkout.ts) to
+  jedyne miejsce do podmiany na Stripe Checkout
+- **Strony informacyjne** — o nas, dostawa i zwroty (FAQ), kontakt, własne 404
+
+## Design i animacje
+
+Kierunek **„Dark Roast Editorial"** — espresso-czerń, kremowa typografia
+serif (Fraunces), złote akcenty, mono-etykiety, subtelne ziarno na całej
+stronie. Pełny brief i kontrakty komponentów: [DESIGN.md](DESIGN.md).
+
+- płynny scroll (**Lenis**) zintegrowany z **GSAP ScrollTrigger**
+- nagłówki odsłaniane linia po linii (**SplitText**), reveale, parallax
+- przypinana sekcja z horyzontalnym przewijaniem (pin + scrub)
+- **View Transitions** — obraz produktu płynnie morfuje między katalogiem
+  a kartą produktu
+- pole ziaren kawy 3D (**react-three-fiber**) reagujące na mysz i scroll
+- magnetyczne przyciski, własny kursor, marquee
+- wszystkie animacje respektują `prefers-reduced-motion`
+
+## Stack
+
+| Warstwa | Technologia |
+|---|---|
+| Framework | Next.js 16 (App Router, SSG, View Transitions) |
+| UI | React 19, TypeScript, Tailwind CSS v4 |
+| Animacje | GSAP (ScrollTrigger, SplitText), Lenis |
+| 3D | three.js, @react-three/fiber, @react-three/drei |
+| Stan koszyka | React Context + `useSyncExternalStore` + `localStorage` |
+| Płatności | mock → Stripe Checkout (przygotowane) |
+
+## Uruchomienie
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build produkcyjny:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Struktura
 
-## Learn More
+```
+src/
+├── app/                 # routy (App Router): /, /sklep, /sklep/[slug],
+│                        # /koszyk, /zamowienie, /o-nas, /kontakt, …
+├── components/
+│   ├── ui/              # prymitywy: Button, Badge, Price, Field, …
+│   ├── motion/          # animacje: SmoothScroll, Reveal, SplitHeading, …
+│   ├── layout/          # Header, Footer, CartDrawer
+│   ├── three/           # scena 3D hero
+│   ├── art/             # SVG-owe ilustracje worków kawy
+│   └── home|shop|product|checkout/   # sekcje per strona
+├── data/products.ts     # katalog 10 kaw (docelowo CMS/baza)
+└── lib/                 # koszyk, checkout, formatowanie cen
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Roadmap
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Stripe Checkout w trybie testowym (klucze w `.env.local`)
+- [ ] Wdrożenie na Vercel
+- [ ] Panel administracyjny (produkty, zamówienia)
+- [ ] Baza danych (Supabase/Postgres) zamiast pliku danych
+- [ ] Kody rabatowe, subskrypcja kawy, integracja z InPost API
