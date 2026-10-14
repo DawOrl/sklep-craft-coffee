@@ -77,7 +77,7 @@ export function Hero() {
         <span className="text-latte font-mono text-[10px] uppercase tracking-[0.2em]">
           Przewiń
         </span>
-        <span className="from-gold block h-12 w-px bg-gradient-to-b to-transparent motion-safe:animate-pulse" />
+        <span className="from-gold block h-12 w-px bg-gradient-to-b to-transparent" />
       </div>
     </section>
   );

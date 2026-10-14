@@ -1,3 +1,4 @@
+import BeanGlyph from "@/components/art/BeanGlyph";
 import Marquee from "@/components/motion/Marquee";
 
 const ITEMS = ["Świeży wypał", "100% arabica", "Specialty", "Małe serie"];
@@ -15,9 +16,7 @@ export function MarqueeDivider() {
             <span className="font-display text-crema text-[clamp(1.375rem,2.6vw,2.25rem)] leading-none font-light tracking-wide uppercase">
               {item}
             </span>
-            <span aria-hidden="true" className="text-gold mx-8 text-xl md:mx-12">
-              ✳
-            </span>
+            <BeanGlyph className="text-gold mx-8 h-5 w-auto md:mx-12 md:h-6" />
           </span>
         ))}
       </Marquee>
