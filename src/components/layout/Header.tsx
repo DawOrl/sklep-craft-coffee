@@ -133,7 +133,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200 motion-reduce:transition-none hover:text-gold ${
+                className={`-my-3 py-3 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200 motion-reduce:transition-none hover:text-gold ${
                   active ? "text-gold" : "text-latte"
                 }`}
               >
@@ -148,7 +148,7 @@ export function Header() {
             type="button"
             onClick={openDrawer}
             aria-label={`Otwórz koszyk, ${count} szt.`}
-            className="border-line text-crema hover:border-gold hover:text-gold flex h-10 items-center gap-2.5 rounded-full border px-4 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200 motion-reduce:transition-none"
+            className="border-line text-crema hover:border-gold hover:text-gold flex h-10 items-center gap-2.5 rounded-full border px-4 pointer-coarse:h-11 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200 motion-reduce:transition-none"
           >
             Koszyk
             <span className="bg-gold text-espresso flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] tabular-nums">
@@ -162,7 +162,7 @@ export function Header() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
-            className="border-line text-crema hover:border-gold flex h-10 w-10 items-center justify-center rounded-full border transition-colors duration-200 motion-reduce:transition-none md:hidden"
+            className="border-line text-crema hover:border-gold flex h-10 w-10 pointer-coarse:h-11 pointer-coarse:w-11 items-center justify-center rounded-full border transition-colors duration-200 motion-reduce:transition-none md:hidden"
           >
             <span aria-hidden="true" className="relative block h-2.75 w-4.5">
               <span

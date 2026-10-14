@@ -55,7 +55,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-latte hover:text-crema text-sm transition-colors duration-200 motion-reduce:transition-none"
+                      className="text-latte hover:text-crema -my-2 inline-block py-2 text-sm transition-colors duration-200 motion-reduce:transition-none"
                     >
                       {link.label}
                     </Link>
