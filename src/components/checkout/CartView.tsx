@@ -12,6 +12,8 @@ import SplitHeading from "@/components/motion/SplitHeading";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Price from "@/components/ui/Price";
+import ProductCard from "@/components/shop/ProductCard";
+import { getBestsellers } from "@/data/products";
 import QtyStepper from "@/components/ui/QtyStepper";
 import useMounted from "@/components/checkout/useMounted";
 import { useCart } from "@/lib/cart";
@@ -42,8 +44,8 @@ export function CartView() {
 
   if (items.length === 0) {
     return (
-      <Container className="flex min-h-[60vh] flex-col items-center justify-center pt-28 pb-24 text-center md:pt-36">
-        <Reveal className="flex flex-col items-center gap-6">
+      <Container className="pt-28 pb-24 md:pt-36">
+        <Reveal className="flex flex-col items-center gap-6 text-center">
           <p className="text-gold font-mono text-[11px] uppercase tracking-[0.2em]">
             Koszyk
           </p>
@@ -51,12 +53,31 @@ export function CartView() {
             Twój koszyk jest <em>pusty</em>
           </h1>
           <p className="text-latte max-w-md text-base leading-relaxed">
-            Wybierz coś z naszej palarni — świeży wypał już na Ciebie czeka.
+            Wybierz coś z naszej palarni. Świeży wypał już na Ciebie czeka.
           </p>
           <Button href="/sklep" size="lg" className="mt-2">
             Przejdź do sklepu
           </Button>
         </Reveal>
+
+        {/* empty state with a next step: the coffees people pick first */}
+        <section aria-labelledby="pusty-koszyk-polecane" className="border-line mt-20 border-t pt-12 md:mt-28">
+          <h2
+            id="pusty-koszyk-polecane"
+            className="text-latte font-mono text-[11px] uppercase tracking-[0.2em]"
+          >
+            Na dobry początek: najczęściej wybierane
+          </h2>
+          <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {getBestsellers().map((product, index) => (
+              <li key={product.slug}>
+                <Reveal delay={index * 0.07} className="h-full">
+                  <ProductCard product={product} />
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </section>
       </Container>
     );
   }
@@ -66,7 +87,7 @@ export function CartView() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-3xl">
           <p className="text-gold mb-4 font-mono text-[11px] uppercase tracking-[0.2em]">
-            krok 01 — koszyk
+            krok 01 / koszyk
           </p>
           <SplitHeading
             as="h1"
@@ -85,7 +106,7 @@ export function CartView() {
           <ul className="border-line divide-line divide-y border-y">
             {items.map((item) => (
               <li key={item.key} className="flex items-start gap-5 py-6 sm:gap-6">
-                <CartThumb item={item} className="h-28 w-20 p-2" />
+                <CartThumb item={item} className="h-30 w-24" />
 
                 <div className="flex min-w-0 flex-1 flex-col">
                   <Link
@@ -114,7 +135,7 @@ export function CartView() {
                     type="button"
                     onClick={() => remove(item.key)}
                     aria-label={`Usuń ${item.name} z koszyka`}
-                    className="border-line text-latte hover:border-ember hover:text-ember flex h-9 w-9 items-center justify-center rounded-full border transition-colors duration-200 motion-reduce:transition-none"
+                    className="border-line text-latte hover:border-ember hover:text-ember flex h-9 w-9 pointer-coarse:h-11 pointer-coarse:w-11 items-center justify-center rounded-full border transition-colors duration-200 motion-reduce:transition-none"
                   >
                     <svg
                       aria-hidden="true"
@@ -144,10 +165,29 @@ export function CartView() {
             <h2 className="text-latte font-mono text-[11px] uppercase tracking-[0.2em]">
               Suma
             </h2>
-            <div className="mt-4 flex items-baseline justify-between gap-4">
-              <span className="text-crema text-sm">Wartość koszyka</span>
-              <Price cents={totalCents} className="text-crema text-3xl" />
-            </div>
+            <dl className="mt-4 space-y-3 text-sm">
+              <div className="flex items-baseline justify-between gap-4">
+                <dt className="text-latte">Wartość koszyka</dt>
+                <dd>
+                  <Price cents={totalCents} className="text-crema" />
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-4">
+                <dt className="text-latte">Dostawa</dt>
+                <dd className="text-crema">
+                  {remainingCents > 0 ? <Price cents={SHIPPING_COST_CENTS} /> : "gratis"}
+                </dd>
+              </div>
+              <div className="border-line flex items-baseline justify-between gap-4 border-t pt-4">
+                <dt className="text-crema">Razem</dt>
+                <dd>
+                  <Price
+                    cents={totalCents + (remainingCents > 0 ? SHIPPING_COST_CENTS : 0)}
+                    className="text-crema text-3xl"
+                  />
+                </dd>
+              </div>
+            </dl>
 
             <div className="border-line mt-6 border-t pt-6">
               <div
@@ -159,8 +199,8 @@ export function CartView() {
                 className="bg-line h-1 overflow-hidden rounded-full"
               >
                 <div
-                  className="bg-gold h-full rounded-full transition-[width] duration-500 ease-out motion-reduce:transition-none"
-                  style={{ width: `${progress}%` }}
+                  className="bg-gold h-full origin-left rounded-full transition-transform duration-500 ease-out motion-reduce:transition-none"
+                  style={{ transform: `scaleX(${progress / 100})` }}
                 />
               </div>
               <p className="text-latte mt-3 text-xs leading-relaxed" aria-live="polite">

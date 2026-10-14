@@ -3,13 +3,12 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-import ProductBagArt from "@/components/art/ProductBagArt";
 import { FREE_SHIPPING_THRESHOLD_CENTS } from "@/components/checkout/shipping";
 import { getLenis } from "@/components/motion/SmoothScroll";
 import Button from "@/components/ui/Button";
 import Price from "@/components/ui/Price";
 import QtyStepper from "@/components/ui/QtyStepper";
-import { getProduct } from "@/data/products";
+import CartThumb from "@/components/checkout/CartThumb";
 import { useCart } from "@/lib/cart";
 import { formatPrice } from "@/lib/format";
 
@@ -24,6 +23,11 @@ export function CartDrawer() {
   const { items, totalCents, count, isDrawerOpen, closeDrawer, setQty, remove } =
     useCart();
   const panelRef = useRef<HTMLDivElement>(null);
+  const remainingCents = Math.max(0, FREE_SHIPPING_THRESHOLD_CENTS - totalCents);
+  const freeShippingProgress = Math.min(
+    100,
+    Math.round((totalCents / FREE_SHIPPING_THRESHOLD_CENTS) * 100),
+  );
   const lastFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -114,7 +118,7 @@ export function CartDrawer() {
             type="button"
             onClick={closeDrawer}
             aria-label="Zamknij koszyk"
-            className="border-line text-latte hover:border-gold hover:text-gold flex h-9 w-9 items-center justify-center rounded-full border transition-colors duration-200 motion-reduce:transition-none"
+            className="border-line text-latte hover:border-gold hover:text-gold flex h-9 w-9 pointer-coarse:h-11 pointer-coarse:w-11 items-center justify-center rounded-full border transition-colors duration-200 motion-reduce:transition-none"
           >
             <svg
               aria-hidden="true"
@@ -134,7 +138,7 @@ export function CartDrawer() {
               Twój koszyk jest pusty
             </p>
             <p className="text-latte text-sm leading-relaxed">
-              Wybierz coś z naszej palarni — świeży wypał już czeka.
+              Wybierz coś z naszej palarni. Świeży wypał już czeka.
             </p>
             <Button href="/sklep" variant="outline" onClick={closeDrawer}>
               Przejdź do sklepu
@@ -147,23 +151,9 @@ export function CartDrawer() {
               className="divide-line flex-1 divide-y overflow-y-auto px-6"
             >
               {items.map((item) => {
-                const product = getProduct(item.slug);
                 return (
                   <li key={item.key} className="flex gap-4 py-5">
-                    <div className="bg-roast-2 h-24 w-[4.5rem] shrink-0 rounded-lg p-1.5">
-                      {product ? (
-                        <ProductBagArt
-                          product={product}
-                          className="h-full w-full"
-                        />
-                      ) : (
-                        <div
-                          aria-hidden="true"
-                          className="h-full w-full rounded"
-                          style={{ backgroundColor: item.palette.bag }}
-                        />
-                      )}
-                    </div>
+                    <CartThumb item={item} className="h-24 w-[4.8rem] rounded-lg" />
 
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex items-start justify-between gap-3">
@@ -178,7 +168,7 @@ export function CartDrawer() {
                           type="button"
                           onClick={() => remove(item.key)}
                           aria-label={`Usuń ${item.name} z koszyka`}
-                          className="text-latte hover:text-ember font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-200 motion-reduce:transition-none"
+                          className="text-latte hover:text-ember -my-2 py-2 font-mono text-[10px] uppercase tracking-[0.2em] pointer-coarse:-my-3 pointer-coarse:py-3 transition-colors duration-200 motion-reduce:transition-none"
                         >
                           Usuń
                         </button>
@@ -211,10 +201,35 @@ export function CartDrawer() {
                 </span>
                 <Price cents={totalCents} className="text-crema text-2xl" />
               </div>
-              <p className="text-latte font-mono text-[10px] uppercase tracking-[0.2em]">
-                Darmowa dostawa od {formatPrice(FREE_SHIPPING_THRESHOLD_CENTS)}
-              </p>
-              <Button href="/koszyk" onClick={closeDrawer} className="w-full">
+              <div>
+                <div
+                  role="progressbar"
+                  aria-label="Postęp do darmowej dostawy"
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={freeShippingProgress}
+                  className="bg-line h-1 overflow-hidden rounded-full"
+                >
+                  <div
+                    className="bg-gold h-full origin-left rounded-full transition-transform duration-500 ease-out motion-reduce:transition-none"
+                    style={{ transform: `scaleX(${freeShippingProgress / 100})` }}
+                  />
+                </div>
+                <p className="text-latte mt-2.5 text-xs" aria-live="polite">
+                  {remainingCents > 0 ? (
+                    <>
+                      Brakuje <span className="text-crema">{formatPrice(remainingCents)}</span> do
+                      darmowej dostawy
+                    </>
+                  ) : (
+                    <span className="text-gold">Masz darmową dostawę</span>
+                  )}
+                </p>
+              </div>
+              <Button href="/zamowienie" onClick={closeDrawer} className="w-full">
+                Przejdź do zamówienia
+              </Button>
+              <Button href="/koszyk" variant="outline" onClick={closeDrawer} className="w-full">
                 Zobacz koszyk
               </Button>
             </div>

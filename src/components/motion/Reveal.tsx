@@ -22,13 +22,15 @@ export function Reveal({ children, delay = 0, className, y = 32 }: RevealProps) 
     if (!el) return;
 
     const mm = gsap.matchMedia();
+    // opacity, not autoAlpha: hidden-until-scrolled content must stay in the
+    // accessibility tree and stay focusable (focus scrolls it into view).
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(
         el,
-        { y, autoAlpha: 0 },
+        { y, opacity: 0 },
         {
           y: 0,
-          autoAlpha: 1,
+          opacity: 1,
           duration: 0.9,
           ease: "power3.out",
           delay,

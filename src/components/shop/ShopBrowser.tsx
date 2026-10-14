@@ -108,7 +108,7 @@ function FilterPill({
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-300 motion-reduce:transition-none ${
+      className={`rounded-full border px-4 py-2 pointer-coarse:min-h-11 font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-300 motion-reduce:transition-none ${
         active
           ? "border-gold bg-gold text-espresso"
           : "border-line text-latte hover:border-gold hover:text-crema"
@@ -126,7 +126,7 @@ interface ShopBrowserProps {
 /**
  * Client catalog browser: filter pills (palenie / rodzaj / mielenie) and a
  * sort select, all synced to URL query params via useSearchParams +
- * router.replace (no scroll) — filtered views are shareable links.
+ * router.replace (no scroll) - filtered views are shareable links.
  */
 export function ShopBrowser({ products }: ShopBrowserProps) {
   const router = useRouter();

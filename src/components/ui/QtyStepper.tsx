@@ -23,14 +23,14 @@ export function QtyStepper({
   className,
   label,
 }: QtyStepperProps) {
-  const height = size === "sm" ? "h-8" : "h-11";
+  const height = size === "sm" ? "h-9 pointer-coarse:h-11" : "h-11";
   const btn =
-    "flex h-full w-8 items-center justify-center text-latte transition-colors duration-200 motion-reduce:transition-none hover:text-gold disabled:pointer-events-none disabled:opacity-40";
+    "flex h-full w-9 pointer-coarse:w-11 items-center justify-center text-latte transition-colors duration-200 motion-reduce:transition-none hover:text-gold disabled:pointer-events-none disabled:opacity-40";
 
   return (
     <div
       role="group"
-      aria-label={label ? `Ilość — ${label}` : "Ilość"}
+      aria-label={label ? `Ilość: ${label}` : "Ilość"}
       className={`border-line inline-flex items-stretch rounded-full border font-mono text-sm ${height} ${className ?? ""}`}
     >
       <button

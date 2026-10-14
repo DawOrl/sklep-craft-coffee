@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { FREE_SHIPPING_THRESHOLD_CENTS } from "@/components/checkout/shipping";
 import Magnetic from "@/components/motion/Magnetic";
 import Button from "@/components/ui/Button";
 import { Select } from "@/components/ui/Field";
@@ -13,8 +14,8 @@ import { formatPrice } from "@/lib/format";
 
 const GRIND_LABELS: Record<Grind, string> = {
   ziarna: "Całe ziarna",
-  "mielona drobno": "Mielona drobno — espresso, kawiarka",
-  "mielona grubo": "Mielona grubo — przelew, french press",
+  "mielona drobno": "Mielona drobno: espresso, kawiarka",
+  "mielona grubo": "Mielona grubo: przelew, french press",
 };
 
 function weightLabel(weight: 250 | 1000): string {
@@ -41,6 +42,12 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
   const variant =
     product.variants.find((v) => v.weight === weight) ?? product.variants[0];
   const totalCents = (variant?.priceCents ?? 0) * qty;
+
+  // 1 kg vs four 250 g bags, straight from the price list
+  const small = product.variants.find((v) => v.weight === 250);
+  const large = product.variants.find((v) => v.weight === 1000);
+  const bulkSaving =
+    small && large ? Math.round((1 - large.priceCents / (small.priceCents * 4)) * 100) : 0;
 
   return (
     <div className="border-line border-t pt-7">
@@ -74,6 +81,11 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
             );
           })}
         </div>
+        {bulkSaving > 0 && (
+          <p className="text-latte mt-3 text-xs">
+            1 kg wychodzi {bulkSaving}% taniej niż cztery paczki po 250 g.
+          </p>
+        )}
       </fieldset>
 
       {/* Grind */}
@@ -91,7 +103,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
       </Select>
       {product.grinds.length === 1 && (
         <p className="text-latte mt-2 font-mono text-[11px] tracking-wide">
-          Tę kawę sprzedajemy wyłącznie w ziarnach — zasługuje na świeże
+          Tę kawę sprzedajemy wyłącznie w ziarnach. Zasługuje na świeże
           mielenie.
         </p>
       )}
@@ -132,6 +144,9 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
           Dodaj do koszyka
         </Button>
       </Magnetic>
+      <p className="text-latte mt-4 text-center font-mono text-[10px] uppercase tracking-[0.2em]">
+        Wysyłka do 48 h od wypału · darmowa od {formatPrice(FREE_SHIPPING_THRESHOLD_CENTS)}
+      </p>
     </div>
   );
 }
