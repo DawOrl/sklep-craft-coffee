@@ -3,8 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ViewTransition } from "react";
 
-import ProductBagArt from "@/components/art/ProductBagArt";
-import Parallax from "@/components/motion/Parallax";
+import ProductPhoto from "@/components/art/ProductPhoto";
 import Reveal from "@/components/motion/Reveal";
 import SplitHeading from "@/components/motion/SplitHeading";
 import ProductAccordion from "@/components/product/ProductAccordion";
@@ -152,8 +151,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Hero: art + sticky info */}
         <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="border-line bg-roast relative overflow-hidden rounded-2xl border">
-            <p className="text-latte pointer-events-none absolute top-6 left-6 z-10 font-mono text-[11px] uppercase tracking-[0.2em]">
+          <div className="border-line bg-roast relative overflow-hidden rounded-2xl border lg:sticky lg:top-28 lg:self-start">
+            <p className="text-crema/80 pointer-events-none absolute top-6 left-6 z-10 font-mono text-[11px] uppercase tracking-[0.2em]">
               {product.origin}
             </p>
             {product.badges && product.badges.length > 0 && (
@@ -163,22 +162,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 ))}
               </div>
             )}
-            <Parallax
-              speed={0.6}
-              className="flex justify-center px-10 py-16 md:px-16 md:py-24"
-            >
-              <ViewTransition name={`vt-product-${product.slug}`}>
-                <div className="w-full max-w-sm">
-                  <ProductBagArt product={product} className="h-auto w-full" />
-                </div>
-              </ViewTransition>
-            </Parallax>
+            <ViewTransition name={`vt-product-${product.slug}`}>
+              <div className="aspect-[4/5]">
+                <ProductPhoto
+                  slug={product.slug}
+                  name={product.name}
+                  sizes="(min-width: 1024px) 46vw, 92vw"
+                  preload
+                />
+              </div>
+            </ViewTransition>
           </div>
 
-          <div className="lg:sticky lg:top-28 lg:self-start">
+          <div>
             <p className="text-gold font-mono text-[11px] uppercase tracking-[0.2em]">
               {product.origin}
-              {product.region ? ` — ${product.region}` : ""}
+              {product.region ? ` / ${product.region}` : ""}
             </p>
             <SplitHeading
               as="h1"

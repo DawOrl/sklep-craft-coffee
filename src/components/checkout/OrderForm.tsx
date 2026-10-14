@@ -131,7 +131,7 @@ export function OrderForm() {
 
   const fieldError = (key: FieldKey) => (touched[key] ? errors[key] : undefined);
 
-  // Cart is empty during SSR — render the summary only after the client
+  // Cart is empty during SSR - render the summary only after the client
   // snapshot loads, so totals are never shown from the empty server cart.
   if (!mounted) {
     return (
@@ -145,7 +145,7 @@ export function OrderForm() {
     <Container className="pt-28 pb-24 md:pt-36">
       <div className="max-w-3xl">
         <p className="text-gold mb-4 font-mono text-[11px] uppercase tracking-[0.2em]">
-          krok 02 — dane i dostawa
+          krok 02 / dane i dostawa
         </p>
         <SplitHeading
           as="h1"
@@ -154,7 +154,7 @@ export function OrderForm() {
           Zamówienie
         </SplitHeading>
         <p className="text-latte mt-5 text-base leading-relaxed md:text-lg">
-          Uzupełnij dane do wysyłki — Twoja kawa trafi do palenia zaraz po
+          Uzupełnij dane do wysyłki. Twoja kawa trafi do palenia zaraz po
           złożeniu zamówienia.
         </p>
       </div>
@@ -246,7 +246,7 @@ export function OrderForm() {
             <ul className="divide-line mt-2 divide-y">
               {items.map((item) => (
                 <li key={item.key} className="flex items-center gap-4 py-4">
-                  <CartThumb item={item} className="h-16 w-12 p-1.5" />
+                  <CartThumb item={item} className="h-15 w-12 rounded-lg" />
                   <div className="min-w-0 flex-1">
                     <p className="text-crema truncate text-sm">{item.name}</p>
                     <p className="text-latte mt-1 font-mono text-[10px] uppercase tracking-[0.2em]">
@@ -298,7 +298,7 @@ export function OrderForm() {
               {submitting ? "Przetwarzanie…" : "Złóż zamówienie"}
             </Button>
             <p className="text-latte mt-4 text-center font-mono text-[10px] uppercase tracking-[0.2em]">
-              Płatności Stripe — wkrótce. To zamówienie testowe.
+              Płatności Stripe: wkrótce. To zamówienie testowe.
             </p>
           </aside>
         </Reveal>

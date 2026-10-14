@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ViewTransition } from "react";
 
-import ProductBagArt from "@/components/art/ProductBagArt";
+import ProductPhoto from "@/components/art/ProductPhoto";
 import Reveal from "@/components/motion/Reveal";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
@@ -10,12 +10,16 @@ import Price from "@/components/ui/Price";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { getBestsellers, type Product } from "@/data/products";
 
-/** Asymmetric editorial placement for the 4 numbered cards. */
-const CARD_LAYOUT: { wrapper: string; art: string }[] = [
-  { wrapper: "md:col-span-7", art: "aspect-[5/4]" },
-  { wrapper: "md:col-span-5 md:mt-28", art: "aspect-[4/5]" },
-  { wrapper: "md:col-span-5 md:-mt-12", art: "aspect-[4/5]" },
-  { wrapper: "md:col-span-7 md:mt-16", art: "aspect-[5/4]" },
+/**
+ * Asymmetric editorial placement for the 4 numbered cards. Wide cards crop
+ * the 4:5 packshot to a square (the bag sits in the middle 60%, so nothing
+ * is cut); narrow cards show the full frame.
+ */
+const CARD_LAYOUT: { wrapper: string; art: string; sizes: string }[] = [
+  { wrapper: "md:col-span-7", art: "aspect-square", sizes: "(min-width: 768px) 56vw, 92vw" },
+  { wrapper: "md:col-span-5 md:mt-28", art: "aspect-[4/5]", sizes: "(min-width: 768px) 40vw, 92vw" },
+  { wrapper: "md:col-span-5 md:-mt-12", art: "aspect-[4/5]", sizes: "(min-width: 768px) 40vw, 92vw" },
+  { wrapper: "md:col-span-7 md:mt-16", art: "aspect-square", sizes: "(min-width: 768px) 56vw, 92vw" },
 ];
 
 interface BestsellerCardProps {
@@ -32,30 +36,28 @@ function BestsellerCard({ product, index }: BestsellerCardProps) {
       <Link
         href={`/sklep/${product.slug}`}
         className="group block"
-        aria-label={`${product.name} — zobacz produkt`}
+        aria-label={`${product.name}: zobacz produkt`}
       >
-        {/* art surface */}
-        <div className="bg-roast border-line group-hover:border-gold/40 group-hover:bg-roast-2 relative overflow-hidden rounded-2xl border transition-colors duration-500 motion-reduce:transition-none">
+        {/* packshot surface */}
+        <div className="bg-roast border-line group-hover:border-gold/40 relative overflow-hidden rounded-2xl border transition-colors duration-500 motion-reduce:transition-none">
           <span
             aria-hidden="true"
-            className="text-latte absolute top-5 left-6 font-mono text-xs tracking-[0.2em]"
+            className="text-crema/80 absolute top-5 left-6 z-10 font-mono text-xs tracking-[0.2em]"
           >
-            {number} — {product.origin.toUpperCase()}
+            {number} / {product.origin.toUpperCase()}
           </span>
           {product.badges?.[0] && (
-            <Badge className="bg-espresso/60 absolute top-4 right-4 backdrop-blur-sm">
-              {product.badges[0]}
-            </Badge>
+            <Badge className="absolute top-4 right-4 z-10">{product.badges[0]}</Badge>
           )}
 
           {/* shared-element morph target for /sklep/[slug] */}
           <ViewTransition name={`vt-product-${product.slug}`}>
-            <div
-              className={`flex items-center justify-center px-10 py-12 md:px-14 ${layout.art}`}
-            >
-              <ProductBagArt
-                product={product}
-                className="h-full w-full transition-transform duration-500 ease-out motion-safe:group-hover:-translate-y-2 motion-safe:group-hover:scale-[1.02]"
+            <div className={`overflow-hidden ${layout.art}`}>
+              <ProductPhoto
+                slug={product.slug}
+                name={product.name}
+                sizes={layout.sizes}
+                className="transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.035]"
               />
             </div>
           </ViewTransition>
@@ -87,7 +89,7 @@ function BestsellerCard({ product, index }: BestsellerCardProps) {
 }
 
 /**
- * Section 3 — bestsellers in an asymmetric, numbered editorial grid.
+ * Section 3 - bestsellers in an asymmetric, numbered editorial grid.
  * Server component; cards link to /sklep/[slug] and carry the
  * vt-product-<slug> view-transition name on the art wrapper.
  */
@@ -99,13 +101,13 @@ export function Bestsellers() {
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-8">
           <SectionHeading
-            eyebrow="01 — Bestsellery"
+            eyebrow="01 / Bestsellery"
             title={
               <>
                 Najczęściej <em>wybierane</em>
               </>
             }
-            description="Cztery wypały, które schodzą z półek najszybciej. Sprawdzone profile — dobre na początek przygody ze specialty i na co dzień."
+            description="Cztery wypały, które schodzą z półek najszybciej. Sprawdzone profile, dobre na początek przygody ze specialty i na co dzień."
           />
           <Reveal delay={0.2} className="hidden md:block">
             <Button variant="outline" href="/sklep">

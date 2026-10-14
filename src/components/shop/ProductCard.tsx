@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ViewTransition } from "react";
 
-import ProductBagArt from "@/components/art/ProductBagArt";
+import ProductPhoto from "@/components/art/ProductPhoto";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Price from "@/components/ui/Price";
@@ -15,10 +15,10 @@ interface ProductCardProps {
 }
 
 /**
- * Catalog card: bag art on a roast tile (view-transition wrapper), badges,
- * serif name, tasting notes, base price and mono rating. Hover: subtle lift,
- * art scale, gold border and a quick-add button (default 250 g / ziarna).
- * The quick-add button is a SIBLING of the link — no nested interactives.
+ * Catalog card: packshot (view-transition wrapper), badges, serif name,
+ * tasting notes, base price and mono rating. Hover: subtle lift, slow photo
+ * zoom, gold border and a quick-add button (default 250 g / ziarna).
+ * The quick-add button is a SIBLING of the link, so nothing interactive nests.
  */
 export function ProductCard({ product }: ProductCardProps) {
   const { add } = useCart();
@@ -31,8 +31,8 @@ export function ProductCard({ product }: ProductCardProps) {
         href={`/sklep/${product.slug}`}
         className="border-line bg-roast group-hover:border-gold/40 group-hover:bg-roast-2 flex h-full flex-col overflow-hidden rounded-2xl border transition-colors duration-500 motion-reduce:transition-none"
       >
-        {/* Art tile */}
-        <div className="relative px-8 pt-10 pb-6">
+        {/* Packshot */}
+        <div className="relative">
           {product.badges && product.badges.length > 0 && (
             <div className="absolute top-4 left-4 z-10 flex flex-wrap gap-2">
               {product.badges.map((badge) => (
@@ -41,10 +41,12 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           )}
           <ViewTransition name={`vt-product-${product.slug}`}>
-            <div className="mx-auto w-full max-w-44">
-              <ProductBagArt
-                product={product}
-                className="h-auto w-full transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            <div className="aspect-[4/5] overflow-hidden">
+              <ProductPhoto
+                slug={product.slug}
+                name={product.name}
+                sizes="(min-width: 1280px) 22rem, (min-width: 640px) 45vw, 92vw"
+                className="transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
             </div>
           </ViewTransition>
@@ -74,12 +76,12 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </Link>
 
-      {/* Quick add — appears on hover/focus; always visible on touch. */}
+      {/* Quick add - appears on hover/focus; always visible on touch. */}
       <div className="pointer-events-none absolute right-4 bottom-4 translate-y-2 opacity-0 transition-[opacity,transform] duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100 pointer-coarse:pointer-events-auto pointer-coarse:translate-y-0 pointer-coarse:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none">
         <Button
           size="sm"
           onClick={() => add(product, { weight: 250, grind: "ziarna" })}
-          aria-label={`Dodaj ${product.name} do koszyka — 250 g, ziarna`}
+          aria-label={`Dodaj ${product.name} do koszyka: 250 g, ziarna`}
         >
           Dodaj
         </Button>

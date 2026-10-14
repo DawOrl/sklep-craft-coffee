@@ -1,28 +1,23 @@
-import ProductBagArt from "@/components/art/ProductBagArt";
-import { getProduct } from "@/data/products";
+import ProductPhoto from "@/components/art/ProductPhoto";
 import type { CartItem } from "@/lib/cart";
 
 interface CartThumbProps {
   item: CartItem;
-  /** Size + padding of the tile, e.g. "h-28 w-20 p-2". */
+  /** Size of the tile, e.g. "h-28 w-[5.6rem]" (keep it 4:5). */
   className?: string;
 }
 
-/** Mini bag art on a roast tile; palette swatch fallback for unknown slugs. */
+/** Packshot thumbnail on a roast tile (plain tile for unknown slugs). */
 export function CartThumb({ item, className }: CartThumbProps) {
-  const product = getProduct(item.slug);
-
   return (
-    <div className={`bg-roast shrink-0 rounded-xl ${className ?? ""}`}>
-      {product ? (
-        <ProductBagArt product={product} className="h-full w-full" />
-      ) : (
-        <div
-          aria-hidden="true"
-          className="h-full w-full rounded-lg"
-          style={{ backgroundColor: item.palette.bag }}
-        />
-      )}
+    <div className={`bg-roast shrink-0 overflow-hidden rounded-xl ${className ?? ""}`}>
+      {/* zoom on the bag: at thumbnail size the full studio frame is mostly backdrop */}
+      <ProductPhoto
+        slug={item.slug}
+        name={item.name}
+        sizes="160px"
+        className="origin-[50%_60%] scale-[1.55]"
+      />
     </div>
   );
 }
