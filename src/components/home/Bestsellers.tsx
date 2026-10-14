@@ -3,7 +3,6 @@ import { ViewTransition } from "react";
 
 import ProductPhoto from "@/components/art/ProductPhoto";
 import Reveal from "@/components/motion/Reveal";
-import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Price from "@/components/ui/Price";
@@ -46,9 +45,6 @@ function BestsellerCard({ product, index }: BestsellerCardProps) {
           >
             {number} / {product.origin.toUpperCase()}
           </span>
-          {product.badges?.[0] && (
-            <Badge className="absolute top-4 right-4 z-10">{product.badges[0]}</Badge>
-          )}
 
           {/* shared-element morph target for /sklep/[slug] */}
           <ViewTransition name={`vt-product-${product.slug}`}>

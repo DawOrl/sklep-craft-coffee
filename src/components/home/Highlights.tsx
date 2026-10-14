@@ -63,7 +63,7 @@ export function Highlights() {
             eyebrow="03 / W liczbach"
             title={
               <>
-                Rzemiosło widać <em>w liczbach</em>
+                Rzemiosło widać <em>w&nbsp;liczbach</em>
               </>
             }
             description="Nie ścigamy się na ilość. Liczy się świeżość, powtarzalność wypału i to, co zostaje w filiżance."

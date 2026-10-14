@@ -171,7 +171,7 @@ export function ProcessStory() {
                 >
                   {step.number}
                 </span>
-                <div className="-mt-6 md:-mt-10">
+                <div className="-mt-3 md:-mt-6">
                   <p className="text-gold font-mono text-[11px] uppercase tracking-[0.2em]">
                     {step.tag}
                   </p>

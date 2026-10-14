@@ -15,23 +15,7 @@ import Container from "@/components/ui/Container";
 export function HomeCta() {
   return (
     <section className="border-line relative overflow-hidden border-t">
-      {/* Blender render (scripts/blender/coffee_beans.py): rozsypane ziarna
-          wychodzą spod tekstu; parallax przesuwa je wolniej niż stronę */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <Parallax speed={0.5} className="absolute inset-x-0 -bottom-[8%] h-[78%]">
-          <Image
-            src={beansSpill}
-            alt=""
-            sizes="100vw"
-            placeholder="blur"
-            className="h-full w-full object-cover object-[50%_70%] opacity-90"
-          />
-        </Parallax>
-        <div className="from-espresso via-espresso/80 absolute inset-0 bg-gradient-to-b to-transparent" />
-        <div className="from-espresso absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t to-transparent" />
-      </div>
-
-      <Container className="relative z-10 pt-28 pb-56 text-center md:pt-40 md:pb-80">
+      <Container className="relative z-10 pt-28 text-center md:pt-40">
         <Reveal y={20}>
           <p className="text-gold font-mono text-[11px] uppercase tracking-[0.2em] md:text-xs">
             04 / Do dzieła
@@ -66,6 +50,24 @@ export function HomeCta() {
           </div>
         </Reveal>
       </Container>
+
+      {/* Blender render (scripts/blender/coffee_beans.py): rozsyp ziaren pod
+          przyciskami, z parallaxą wolniejszą niż strona */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none relative -mt-4 h-[clamp(16rem,40vw,36rem)] overflow-hidden"
+      >
+        <Parallax speed={0.5} className="absolute inset-x-0 -inset-y-[12%]">
+          <Image
+            src={beansSpill}
+            alt=""
+            sizes="100vw"
+            placeholder="blur"
+            className="h-full w-full object-cover object-[50%_60%]"
+          />
+        </Parallax>
+        <div className="from-espresso absolute inset-0 bg-gradient-to-b via-espresso/10 to-transparent" />
+      </div>
     </section>
   );
 }
