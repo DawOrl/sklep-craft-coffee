@@ -152,9 +152,9 @@ export function ProcessStory() {
           {STEPS.map((step, index) => (
             <article
               key={step.number}
-              className="relative shrink-0 motion-safe:md:grid motion-safe:md:w-[min(76vw,68rem)] motion-safe:md:grid-cols-[auto_minmax(0,1fr)] motion-safe:md:items-end motion-safe:md:gap-12"
+              className="relative shrink-0 md:grid md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:items-end md:gap-12 motion-safe:md:w-[min(76vw,68rem)] motion-safe:md:grid-cols-[auto_minmax(0,1fr)]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:max-w-2xl motion-safe:md:aspect-[4/5] motion-safe:md:h-[min(60vh,40rem)]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:aspect-[4/5] motion-safe:md:h-[min(60vh,40rem)]">
                 <Image
                   src={step.image}
                   alt={step.alt}
@@ -164,7 +164,7 @@ export function ProcessStory() {
                   loading={index === 0 ? "eager" : "lazy"}
                 />
               </div>
-              <div className="border-line mt-8 border-l pl-6 md:pl-10 motion-safe:md:mt-0 motion-safe:md:pb-4">
+              <div className="border-line mt-8 border-l pl-6 md:mt-0 md:pb-4 md:pl-10">
                 <span
                   aria-hidden="true"
                   className="text-crema/10 pointer-events-none block font-mono text-[clamp(5rem,16vh,11rem)] leading-none font-medium select-none"
