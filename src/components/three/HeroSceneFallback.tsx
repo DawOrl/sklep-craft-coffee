@@ -1,6 +1,6 @@
 /**
  * Lightweight placeholder shown while the 3D hero chunk loads.
- * Server-safe, zero JS — import directly from this file in `next/dynamic`
+ * Server-safe, zero JS - import directly from this file in `next/dynamic`
  * fallbacks so the three.js bundle is not pulled in with it.
  */
 export interface HeroSceneFallbackProps {
