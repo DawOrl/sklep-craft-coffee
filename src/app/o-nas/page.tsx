@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
+
+import cupping from "@/assets/story/cupping.webp";
+import roaster from "@/assets/story/roaster.webp";
+import sacks from "@/assets/story/sacks.webp";
 
 import Parallax from "@/components/motion/Parallax";
 import Reveal from "@/components/motion/Reveal";
@@ -10,62 +15,66 @@ import SectionHeading from "@/components/ui/SectionHeading";
 export const metadata: Metadata = {
   title: "O nas",
   description:
-    "Craft Coffee to rzemieślnicza palarnia z Krakowa. Od 2019 roku palimy kawę specialty w małych seriach — bezpośredni handel, świeży wypał, pełna kontrola.",
+    "Craft Coffee to rzemieślnicza palarnia z Krakowa. Od 2019 roku palimy kawę specialty w małych seriach: bezpośredni handel, świeży wypał, pełna kontrola.",
 };
 
 interface StorySection {
   eyebrow: string;
   title: ReactNode;
   paragraphs: string[];
-  glyph: string;
+  image: StaticImageData;
+  alt: string;
   caption: string;
   parallaxSpeed: number;
 }
 
 const STORY: StorySection[] = [
   {
-    eyebrow: "01 — Początek",
+    eyebrow: "01 / Początek",
     title: (
       <>
         Pięć kilogramów i jeden <em>upór</em>
       </>
     ),
     paragraphs: [
-      "Zaczynaliśmy w 2019 roku, w wynajętym kącie krakowskiej hali — z używanym piecem na pięć kilogramów i jedną obsesją: świeżością. Pierwsze wypały trafiały do zaprzyjaźnionych kawiarni, a notatki z każdej serii zapisywaliśmy ręcznie w zeszycie.",
-      "Ten zeszyt mamy do dziś. Od tamtej pory zmieniło się prawie wszystko — poza przekonaniem, że dobra kawa nie znosi dróg na skróty.",
+      "Zaczynaliśmy w 2019 roku, w wynajętym kącie krakowskiej hali, z używanym piecem na pięć kilogramów i jedną obsesją: świeżością. Pierwsze wypały trafiały do zaprzyjaźnionych kawiarni, a notatki z każdej serii zapisywaliśmy ręcznie w zeszycie.",
+      "Ten zeszyt mamy do dziś. Od tamtej pory zmieniło się prawie wszystko, poza przekonaniem, że dobra kawa nie znosi dróg na skróty.",
     ],
-    glyph: "&",
-    caption: "Ziarno & ogień",
+    image: roaster,
+    alt: "Mały piec do palenia kawy z tacą pełną świeżo palonych ziaren w ceglanej hali, obok zeszyt na stole",
+    caption: "Piec na pięć kilogramów",
     parallaxSpeed: 0.7,
   },
   {
-    eyebrow: "02 — Pochodzenie",
+    eyebrow: "02 / Pochodzenie",
     title: (
       <>
         Znamy ludzi za każdym <em>ziarnem</em>
       </>
     ),
     paragraphs: [
-      "Kupujemy bezpośrednio od farmerów i małych kooperatyw — z Etiopii, Kolumbii, Kenii czy Peru. Płacimy powyżej cen giełdowych, bo stabilność po stronie farmy to lepsze ziarno po naszej.",
-      "Każdą umowę traktujemy jak relację na lata, nie transakcję na sezon. Dzięki temu wiemy dokładnie, skąd pochodzi każdy worek, który wjeżdża do palarni — i możemy o nim opowiedzieć na opakowaniu.",
+      "Kupujemy bezpośrednio od farmerów i małych kooperatyw: z Etiopii, Kolumbii, Kenii czy Peru. Płacimy powyżej cen giełdowych, bo stabilność po stronie farmy to lepsze ziarno po naszej.",
+      "Każdą umowę traktujemy jak relację na lata, nie transakcję na sezon. Dzięki temu wiemy dokładnie, skąd pochodzi każdy worek, który wjeżdża do palarni, i możemy o nim opowiedzieć na opakowaniu.",
     ],
-    glyph: "12",
-    caption: "Odmian w stałej ofercie",
+    image: sacks,
+    alt: "Jutowe worki z zielonym, niepalonym ziarnem kawy i drewniana szufelka w otwartym worku",
+    caption: "Zielone ziarno prosto od farm",
     parallaxSpeed: -0.7,
   },
   {
-    eyebrow: "03 — Rzemiosło",
+    eyebrow: "03 / Rzemiosło",
     title: (
       <>
         Małe serie, pełna <em>kontrola</em>
       </>
     ),
     paragraphs: [
-      "Palimy w seriach po kilkanaście kilogramów, kilka razy w tygodniu — nigdy na zapas. Profil każdej kawy rozwijamy tygodniami i cuppingujemy każdą serię, zanim trafi do sprzedaży.",
-      "Każda paczka opuszcza palarnię najpóźniej 48 godzin po wypale. Tę różnicę czuć w filiżance — i właśnie dla niej to wszystko robimy.",
+      "Palimy w seriach po kilkanaście kilogramów, kilka razy w tygodniu, nigdy na zapas. Profil każdej kawy rozwijamy tygodniami i cuppingujemy każdą serię, zanim trafi do sprzedaży.",
+      "Każda paczka opuszcza palarnię najpóźniej 48 godzin po wypale. Tę różnicę czuć w filiżance i właśnie dla niej to wszystko robimy.",
     ],
-    glyph: "48",
-    caption: "Godzin od wypału do wysyłki",
+    image: cupping,
+    alt: "Rząd porcelanowych czarek z mieloną kawą i łyżki do cuppingu na drewnianym stole",
+    caption: "Cupping przed każdą wysyłką",
     parallaxSpeed: 0.7,
   },
 ];
@@ -79,12 +88,12 @@ const TIMELINE: { year: string; title: string; text: string }[] = [
   {
     year: "2021",
     title: "Własny piec",
-    text: "Przeprowadzka na Spokojną 12 i pierwszy własny piec — 25 kilogramów na wsad.",
+    text: "Przeprowadzka na Spokojną 12 i pierwszy własny piec: 25 kilogramów na wsad.",
   },
   {
     year: "2024",
-    title: "12 odmian",
-    text: "Stała oferta rośnie do dwunastu kaw z trzech kontynentów — w tym dwóch autorskich mieszanek.",
+    title: "Dziesięć kaw",
+    text: "Stała oferta rośnie do dziesięciu kaw z trzech kontynentów, w tym dwóch autorskich mieszanek.",
   },
   {
     year: "2026",
@@ -102,7 +111,7 @@ const VALUES: { no: string; title: string; text: string }[] = [
   {
     no: "02",
     title: "Bezpośredni handel",
-    text: "Kupujemy ziarno wprost od farmerów i kooperatyw, płacąc uczciwie — powyżej cen giełdowych.",
+    text: "Kupujemy ziarno wprost od farmerów i kooperatyw, płacąc uczciwie: powyżej cen giełdowych.",
   },
   {
     no: "03",
@@ -112,27 +121,27 @@ const VALUES: { no: string; title: string; text: string }[] = [
 ];
 
 function StoryTile({
-  glyph,
+  image,
+  alt,
   caption,
   parallaxSpeed,
-}: Pick<StorySection, "glyph" | "caption" | "parallaxSpeed">) {
+}: Pick<StorySection, "image" | "alt" | "caption" | "parallaxSpeed">) {
   return (
-    <div className="border-line bg-roast relative aspect-[4/5] overflow-hidden rounded-2xl border">
-      <Parallax
-        speed={parallaxSpeed}
-        className="absolute inset-0 flex items-center justify-center"
-      >
-        <span
-          aria-hidden="true"
-          className="font-display text-gold/15 text-[clamp(9rem,22vw,17rem)] leading-none font-light italic select-none"
-        >
-          {glyph}
-        </span>
+    <figure className="border-line bg-roast relative aspect-[4/5] overflow-hidden rounded-2xl border">
+      {/* image is 120% tall so the parallax drift never shows an edge */}
+      <Parallax speed={parallaxSpeed} className="absolute inset-x-0 -inset-y-[10%]">
+        <Image
+          src={image}
+          alt={alt}
+          placeholder="blur"
+          sizes="(min-width: 768px) 46vw, 92vw"
+          className="h-full w-full object-cover"
+        />
       </Parallax>
-      <span className="text-latte border-line bg-espresso/60 absolute bottom-6 left-6 rounded-full border px-4 py-2 font-mono text-[10px] uppercase tracking-[0.2em] backdrop-blur">
+      <figcaption className="text-crema bg-espresso/70 absolute bottom-6 left-6 rounded-full px-4 py-2 font-mono text-[10px] uppercase tracking-[0.2em]">
         {caption}
-      </span>
-    </div>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -143,7 +152,7 @@ export default function ONasPage() {
       <section className="pt-32 pb-16 md:pt-44 md:pb-24">
         <Container>
           <p className="text-gold mb-5 font-mono text-[11px] uppercase tracking-[0.2em]">
-            Nasza historia — Kraków
+            Nasza historia / Kraków
           </p>
           <SplitHeading
             as="h1"
@@ -153,15 +162,15 @@ export default function ONasPage() {
           </SplitHeading>
           <Reveal delay={0.3} className="mt-8 max-w-2xl">
             <p className="text-latte text-base leading-relaxed md:text-lg">
-              Craft Coffee to mała palarnia z Krakowa. Nie gonimy za skalą —
-              gonimy za profilem, który pozwala ziarnu opowiedzieć, skąd
+              Craft Coffee to mała palarnia z Krakowa. Nie gonimy za skalą.
+              Gonimy za profilem, który pozwala ziarnu opowiedzieć, skąd
               pochodzi.
             </p>
           </Reveal>
         </Container>
       </section>
 
-      {/* Story sections — alternating layout */}
+      {/* Story sections: alternating layout */}
       {STORY.map((section, i) => (
         <section
           key={section.eyebrow}
@@ -171,7 +180,8 @@ export default function ONasPage() {
             <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
               <Reveal className={i % 2 === 1 ? "md:order-2" : undefined}>
                 <StoryTile
-                  glyph={section.glyph}
+                  image={section.image}
+                  alt={section.alt}
                   caption={section.caption}
                   parallaxSpeed={section.parallaxSpeed}
                 />
@@ -200,13 +210,13 @@ export default function ONasPage() {
       <section className="border-line border-t py-20 md:py-28">
         <Container>
           <SectionHeading
-            eyebrow="04 — OŚ CZASU"
+            eyebrow="04 / Oś czasu"
             title={
               <>
                 Od pierwszego <em>wypału</em>
               </>
             }
-            description="Siedem lat, jeden kierunek — coraz lepsze ziarno i coraz krótsza droga z palarni do Twojej filiżanki."
+            description="Siedem lat, jeden kierunek: coraz lepsze ziarno i coraz krótsza droga z palarni do Twojej filiżanki."
           />
           <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {TIMELINE.map((item, i) => (
@@ -234,30 +244,32 @@ export default function ONasPage() {
       <section className="border-line border-t py-20 md:py-28">
         <Container>
           <SectionHeading
-            eyebrow="05 — WARTOŚCI"
+            eyebrow="05 / Wartości"
             title={
               <>
                 W co <em>wierzymy</em>
               </>
             }
           />
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <ol className="border-line mt-14 border-b">
             {VALUES.map((value, i) => (
-              <Reveal key={value.no} delay={i * 0.08} className="h-full">
-                <article className="border-line bg-roast hover:bg-roast-2 flex h-full flex-col rounded-2xl border p-8 transition-colors duration-300 motion-reduce:transition-none md:p-10">
-                  <span className="text-gold font-mono text-[11px] tracking-[0.2em]">
-                    {value.no}
-                  </span>
-                  <h3 className="font-display text-crema mt-6 text-2xl font-light md:text-3xl">
-                    {value.title}
-                  </h3>
-                  <p className="text-latte mt-4 text-sm leading-relaxed md:text-base">
-                    {value.text}
-                  </p>
-                </article>
-              </Reveal>
+              <li key={value.no} className="border-line border-t">
+                <Reveal delay={i * 0.08}>
+                  <article className="grid gap-4 py-8 md:grid-cols-12 md:items-baseline md:gap-8 md:py-10">
+                    <span className="text-gold font-mono text-[11px] tracking-[0.2em] md:col-span-1">
+                      {value.no}
+                    </span>
+                    <h3 className="font-display text-crema text-3xl font-light tracking-tight md:col-span-4 md:text-5xl">
+                      {value.title}
+                    </h3>
+                    <p className="text-latte max-w-xl text-base leading-relaxed md:col-span-7 md:text-lg">
+                      {value.text}
+                    </p>
+                  </article>
+                </Reveal>
+              </li>
             ))}
-          </div>
+          </ol>
         </Container>
       </section>
     </>

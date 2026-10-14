@@ -1,3 +1,6 @@
+import Image from "next/image";
+
+import beansSpill from "@/assets/render/beans-spill.webp";
 import Magnetic from "@/components/motion/Magnetic";
 import Parallax from "@/components/motion/Parallax";
 import Reveal from "@/components/motion/Reveal";
@@ -6,26 +9,32 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 
 /**
- * Section 6 — big closing CTA to /sklep with a slow parallax gold glow.
+ * Section 6: big closing CTA to /sklep over a rendered spill of beans.
  * Server component.
  */
 export function HomeCta() {
   return (
     <section className="border-line relative overflow-hidden border-t">
-      {/* decorative parallax glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
-      >
-        <Parallax speed={-0.6}>
-          <div className="bg-gold/10 h-[34rem] w-[34rem] rounded-full blur-3xl" />
+      {/* Blender render (scripts/blender/coffee_beans.py): rozsypane ziarna
+          wychodzą spod tekstu; parallax przesuwa je wolniej niż stronę */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <Parallax speed={0.5} className="absolute inset-x-0 -bottom-[8%] h-[78%]">
+          <Image
+            src={beansSpill}
+            alt=""
+            sizes="100vw"
+            placeholder="blur"
+            className="h-full w-full object-cover object-[50%_70%] opacity-90"
+          />
         </Parallax>
+        <div className="from-espresso via-espresso/80 absolute inset-0 bg-gradient-to-b to-transparent" />
+        <div className="from-espresso absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t to-transparent" />
       </div>
 
-      <Container className="relative z-10 py-28 text-center md:py-44">
+      <Container className="relative z-10 pt-28 pb-56 text-center md:pt-40 md:pb-80">
         <Reveal y={20}>
           <p className="text-gold font-mono text-[11px] uppercase tracking-[0.2em] md:text-xs">
-            04 — Do dzieła
+            04 / Do dzieła
           </p>
         </Reveal>
 
@@ -39,7 +48,7 @@ export function HomeCta() {
 
         <Reveal delay={0.25}>
           <p className="text-latte mx-auto mt-8 max-w-xl text-base leading-relaxed md:text-lg">
-            Wybierz ziarna i sposób mielenia — my zajmiemy się resztą. Świeży
+            Wybierz ziarna i sposób mielenia, a my zajmiemy się resztą. Świeży
             wypał wyjedzie do Ciebie najpóźniej 48 godzin po paleniu.
           </p>
         </Reveal>
