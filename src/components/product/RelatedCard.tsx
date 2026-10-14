@@ -46,7 +46,7 @@ export function RelatedCard({ product, delay = 0 }: RelatedCardProps) {
               {product.name}
             </h3>
             <p className="text-latte mt-2 font-mono text-[10px] uppercase tracking-[0.2em]">
-              {product.notes.join(" • ")}
+              {product.notes.join("\u00a0• ")}
             </p>
           </div>
           <Price

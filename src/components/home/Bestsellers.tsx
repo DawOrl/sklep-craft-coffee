@@ -66,7 +66,7 @@ function BestsellerCard({ product, index }: BestsellerCardProps) {
               {product.name}
             </h3>
             <p className="text-latte mt-2 font-mono text-[11px] uppercase tracking-[0.2em]">
-              {product.notes.join(" • ")}
+              {product.notes.join("\u00a0• ")}
             </p>
           </div>
           <p className="shrink-0 text-right">

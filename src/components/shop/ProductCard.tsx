@@ -65,7 +65,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </span>
           </div>
           <p className="text-latte font-mono text-[10px] uppercase tracking-[0.2em]">
-            {product.notes.join(" • ")}
+            {product.notes.join("\u00a0• ")}
           </p>
           <p className="mt-auto pt-3 pr-24">
             <Price cents={baseVariant.priceCents} className="text-crema text-lg" />
