@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import NewsletterForm from "@/components/layout/NewsletterForm";
 import Container from "@/components/ui/Container";
 
 const COLUMNS = [
@@ -21,7 +22,7 @@ const COLUMNS = [
   },
 ] as const;
 
-/** Site footer: big serif CTA, link columns, mock newsletter, small print. */
+/** Site footer: big serif CTA, link columns, demo newsletter, small print. */
 export function Footer() {
   return (
     <footer className="border-line border-t">
@@ -97,24 +98,7 @@ export function Footer() {
             <p className="text-latte mt-5 text-sm leading-relaxed">
               Świeże wypały i nowości. Raz w miesiącu, bez spamu.
             </p>
-            <div className="mt-5 flex items-center gap-2">
-              <label htmlFor="newsletter-email" className="sr-only">
-                Adres e-mail
-              </label>
-              <input
-                id="newsletter-email"
-                type="email"
-                autoComplete="email"
-                placeholder="Twój adres e-mail"
-                className="border-line bg-roast text-crema placeholder:text-latte/80 focus:border-gold h-11 w-full rounded-full border px-5 text-sm transition-colors duration-200 motion-reduce:transition-none"
-              />
-              <button
-                type="button"
-                className="bg-gold text-espresso hover:bg-gold-soft h-11 shrink-0 rounded-full px-5 font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-200 motion-reduce:transition-none"
-              >
-                Zapisz się
-              </button>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
 
