@@ -16,7 +16,7 @@ export function CartThumb({ item, className }: CartThumbProps) {
         slug={item.slug}
         name={item.name}
         sizes="160px"
-        className="origin-[50%_60%] scale-[1.55]"
+        className="origin-[50%_56%] scale-[1.42]"
       />
     </div>
   );
