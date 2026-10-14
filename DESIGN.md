@@ -1,15 +1,15 @@
-# Craft Coffee — Design System & Architecture Contract
+# Craft Coffee - Design System & Architecture Contract
 
 > **BINDING CONTRACT.** Every agent working on this repo must follow this file exactly:
 > colors, fonts, motion language, TypeScript contracts, file ownership.
 > All site copy is in **POLISH**. Tone: rzemieślniczy, spokojny, pewny siebie,
 > bez wykrzykników, forma „Ty". Prices in PLN.
 
-## 1. Art direction — "Dark Roast Editorial"
+## 1. Art direction - "Dark Roast Editorial"
 
 Premium, magazynowy klimat ciemnej palarni kawy. Głęboka espresso-czerń, kremowe
 serify, złote akcenty, dużo światła (whitespace), cienkie linie 1px, editorial
-numbering („01 — Etiopia"), subtelne ziarno (grain) na całej stronie.
+numbering („01 - Etiopia"), subtelne ziarno (grain) na całej stronie.
 Inspiracja: Awwwards-owe strony marek specialty coffee.
 
 ## 2. Color tokens (Tailwind v4 `@theme` in `globals.css`)
@@ -29,7 +29,7 @@ utilities, e.g. `bg-espresso`, `text-crema`, `border-line`):
 --color-ember:    #c05f3c;   /* rzadko: badge „nowość/limitowana" */
 ```
 
-Exception: per-product `palette` colors (sekcja 6) used ONLY inside bag art /
+Exception: per-product `palette` colors (sekcja 6) used ONLY for bag photo colours /
 product accents.
 
 ## 3. Typography
@@ -39,13 +39,13 @@ product accents.
   `font-display`. Italic Fraunces for emphasized single words inside headlines.
 - **Body/UI:** Geist Sans (`--font-geist-sans`, default `font-sans`).
 - **Labels/eyebrows/mono details:** Geist Mono (`font-mono`), uppercase,
-  `tracking-[0.2em]`, 11–12px — e.g. `„01 — ETIOPIA"`, `„ŚWIEŻY WYPAŁ"`.
+  `tracking-[0.2em]`, 11–12px - e.g. `„01 - ETIOPIA"`, `„ŚWIEŻY WYPAŁ"`.
 - Scale: hero `clamp(3rem, 9vw, 8.25rem)` leading ~0.95; section h2
   `clamp(2.25rem, 5vw, 4rem)`; body 16–18px, `text-latte` for descriptions.
 
 ## 4. Motion language (GSAP + Lenis)
 
-Stack: `gsap` + `gsap/ScrollTrigger` (+ `gsap/SplitText` — free since GSAP 3.13),
+Stack: `gsap` + `gsap/ScrollTrigger` (+ `gsap/SplitText` - free since GSAP 3.13),
 `lenis` smooth scroll. ALL motion components live in `src/components/motion/`
 and MUST respect `prefers-reduced-motion` (render static, no pin/scrub).
 
@@ -56,7 +56,7 @@ and MUST respect `prefers-reduced-motion` (render static, no pin/scrub).
   y: 110%→0, stagger.
 - **Parallax images:** `yPercent` ±12, scrub.
 - **Pinned storytelling:** ScrollTrigger `pin: true, scrub: 1` (home: sekcja
-  „Od ziarna do filiżanki" — horizontal scroll przez 4 kroki).
+  „Od ziarna do filiżanki" - horizontal scroll przez 4 kroki).
 - **Marquee:** CSS keyframes `translateX(-50%)`, duplicated content, ~28s linear.
 - **Magnetic buttons:** strength ~0.35, only on `(hover: hover) and (pointer: fine)`.
 - **Custom cursor:** 8px gold dot + 36px ring (lerp 0.15), `mix-blend-difference`;
@@ -83,7 +83,7 @@ and MUST respect `prefers-reduced-motion` (render static, no pin/scrub).
 ### View Transitions (page transitions)
 
 If Next 16 docs confirm the experimental flag (`experimental.viewTransition`
-in `next.config.ts`) — enable it. Shared-element morph contract: the product
+in `next.config.ts`) - enable it. Shared-element morph contract: the product
 image wrapper gets inline `style={{ viewTransitionName: 'vt-product-' + slug }}`
 in BOTH the catalog card and the product page hero. Keep default cross-fade for
 other navigations. If the flag doesn't exist in this version, skip silently.
@@ -112,12 +112,13 @@ other navigations. If the flag doesn't exist in this version, skip silently.
   staggered links.
 - **Footer**: big serif CTA „Napijmy się kawy", link columns (Sklep, Informacje,
   Kontakt), mock newsletter input, mono small print
-  „© 2026 Craft Coffee — projekt demonstracyjny".
+  „© 2026 Craft Coffee - projekt demonstracyjny".
 - **CartDrawer** (right slide-over, z-40, focus-trapped, Esc closes): items with
-  mini bag art, QtyStepper, remove, suma, CTA „Zobacz koszyk" → `/koszyk`.
+  photo thumbs, QtyStepper, remove, suma, free-shipping progress, CTAs
+  „Przejdź do zamówienia" → `/zamowienie` and „Zobacz koszyk" → `/koszyk`.
   Opens automatically after add-to-cart.
 
-## 6. Data contract — `src/data/products.ts`
+## 6. Data contract - `src/data/products.ts`
 
 ```ts
 export type Roast = 'jasne' | 'średnie' | 'ciemne';
@@ -153,7 +154,7 @@ Prices 4200–6900 cents (250g), 1kg ≈ 3.2× ceny 250g. Palety `bag` harmonizi
 with the dark theme (muted: oliwka, ceglasty, piaskowy, bordo, szałwia…),
 `accent` lighter version.
 
-## 7. Cart contract — `src/lib/cart.tsx`
+## 7. Cart contract - `src/lib/cart.tsx`
 
 ```tsx
 export interface CartItem {
@@ -183,35 +184,40 @@ Persist to `localStorage` key `craft-coffee-cart-v1`. Hydration-safe: read in
 (`Intl.NumberFormat('pl-PL', { style:'currency', currency:'PLN' })`).
 
 `src/lib/checkout.ts`: `createOrder(data: OrderData, items: CartItem[]):
-Promise<{ orderId: string }>` — MOCK (~1.2s delay, random id `CC-XXXXXX`).
+Promise<{ orderId: string }>` - MOCK (~1.2s delay, random id `CC-XXXXXX`).
 Single TODO comment: replace with Stripe Checkout session later.
 
-## 8. Bag art — `src/components/art/ProductBagArt.tsx`
+## 8. Product photos - `src/components/art/ProductPhoto.tsx`
 
-`<ProductBagArt product={Product} className?>` — consistent SVG illustration of
-a coffee bag (stojący doypack): bag body in `palette.bag`, fold/clip detail,
-kraft label with serif initial of origin + mono name + roast dots (1–3 wg
-palenia), accent `palette.accent`. Subtle, premium, flat-illustration style;
-must look good 80px–600px. This is THE product image everywhere (cards, product
-page, cart, drawer).
+`<ProductPhoto slug name sizes className? preload?>` renders the product
+packshot (`src/assets/products/<slug>.webp`, map in `src/data/images.ts`) with
+`next/image` and a blur placeholder. One consistent series: the same flat-bottom
+bag, light and backdrop; only the paper colour (`palette.bag`) and the label
+mark change (origin initial, `&` for blends). The parent sets size and aspect
+(4:5, or square crop on wide bestseller cards). Small thumbnails zoom in on the
+bag (`CartThumb`). `BeanGlyph` (same file folder) is the flat bean mark used as
+a separator.
 
-## 9. 3D — `src/components/three/HeroScene.tsx`
+## 9. 3D - `src/components/three/HeroScene.tsx`
 
-Default export, client component `<HeroScene className?>`. R3F `<Canvas>`:
-field of ~12–18 procedural coffee beans (squashed spheres + crease seam),
-materials in palette (roast browns + 1–2 gold), soft key light + gold rim
-light, fog to espresso bg, slow float (drei `Float`), group reacts to mouse
-(lerp) and scroll progress (slight rotation). `dpr={[1, 1.75]}`, no shadows or
-soft only, `gl={{ antialias: true, alpha: true }}`. Reduced-motion → static
-frame. Consumed by home page via `next/dynamic` (`ssr: false`) inside a client
-wrapper, with a styled gradient placeholder fallback.
+Default export, client component `<HeroScene className?>`. Geometry comes from
+`public/models/coffee-beans.glb` (4 bean variants built by
+`scripts/blender/coffee_beans.py`: flattened ellipsoid, flat side with an
+S-shaped centre cut, roast colour baked into `COLOR_0`, meshopt compression).
+One `InstancedMesh` per variant, per-bean brightness jitter via instance colour,
+satin `MeshPhysicalMaterial` lit by drei `Environment` + `Lightformer` panels
+(no HDR download). Separate layouts for landscape and portrait viewports. Beans
+settle in on load, float slowly, the group follows the mouse and scroll.
+`frameloop` is `demand` when the hero is off screen or under reduced motion
+(static frame). Consumed via `next/dynamic` (`ssr: false`) inside a client
+wrapper, canvas fades in once the model is ready.
 
 ## 10. Routes & file ownership
 
 | Route / file | Owner |
 |---|---|
 | `src/app/layout.tsx`, `globals.css`, `next.config.ts` | foundation-design |
-| `src/components/ui/*`, `motion/*`, `layout/*` (Header, Footer, CartDrawer), `art/ProductBagArt.tsx`, `src/lib/format.ts` | foundation-design |
+| `src/components/ui/*`, `motion/*`, `layout/*` (Header, Footer, CartDrawer), `art/*` (ProductPhoto, BeanGlyph), `src/lib/format.ts` | foundation-design |
 | `src/data/products.ts`, `src/lib/cart.tsx`, `src/lib/checkout.ts` | foundation-data |
 | `src/app/page.tsx`, `src/components/home/*` | page-home |
 | `src/components/three/*` | page-hero3d |
@@ -224,40 +230,40 @@ Do NOT edit files you don't own. Import across boundaries per contracts above.
 
 ## 11. Page specs (short)
 
-- **/** — (1) Hero: full-viewport, HeroScene background, mono eyebrow
-  „PALARNIA RZEMIEŚLNICZA — OD 2019", giant split headline „Kawa, która ma
+- **/** - (1) Hero: full-viewport, HeroScene background, mono eyebrow
+  „PALARNIA RZEMIEŚLNICZA - OD 2019", giant split headline „Kawa, która ma
   *charakter*" (italic accent), sub, magnetic CTA „Odkryj nasze kawy" →
   `/sklep`, scroll indicator; (2) marquee divider „ŚWIEŻY WYPAŁ • 100% ARABICA
   • SPECIALTY • MAŁE SERIE •"; (3) Bestsellery: asymmetric editorial grid,
-  numbered cards 01–04; (4) „Od ziarna do filiżanki" — PINNED horizontal
+  numbered cards 01–04; (4) „Od ziarna do filiżanki" - PINNED horizontal
   storytelling, 4 steps (Zbiór → Palenie → Mielenie → Parzenie), huge numbers,
   step copy; (5) Wyróżniki + Counters: „48h od wypału do wysyłki", „12 odmian",
   „100% arabica", „4.9 ocena"; (6) duża CTA sekcja → /sklep.
-- **/sklep** — filter bar (palenie, rodzaj, mielenie dostępne), sort (cena ↑↓,
-  nazwa, ocena), staggered grid of ProductCards (bag art, notes, price, hover
+- **/sklep** - filter bar (palenie, rodzaj, mielenie dostępne), sort (cena ↑↓,
+  nazwa, ocena), staggered grid of ProductCards (packshot, notes, price, hover
   lift + quick-add), client-side filtering of static data, URL-synced via
   `useSearchParams` + `router.replace`, empty state, licznik wyników mono.
-- **/sklep/[slug]** — `generateStaticParams`; breadcrumb mono; left: big bag
+- **/sklep/[slug]** - `generateStaticParams`; breadcrumb mono; left: big bag
   art (view-transition name) on roast surface w/ parallax; right sticky:
   name (split reveal), notes pills, rating, variant pickers (weight pills +
   grind select), live Price, QtyStepper, „Dodaj do koszyka" (magnetic),
   accordion (pochodzenie/parzenie/dostawa); below: story + spec table
   (region, proces, wysokość) + „Podobne kawy" (same roast, 3 szt.);
   Product JSON-LD.
-- **/koszyk** — full cart table, steppers, remove, suma + darmowa dostawa od
+- **/koszyk** - full cart table, steppers, remove, suma + darmowa dostawa od
   14900 cents (progress bar), CTA „Przejdź do zamówienia" → `/zamowienie`;
   empty state z CTA do sklepu.
-- **/zamowienie** — 2 kolumny: form (imię, email, telefon, adres, miasto, kod
+- **/zamowienie** - 2 kolumny: form (imię, email, telefon, adres, miasto, kod
   pocztowy; walidacja inline po polsku) + podsumowanie pozycji; submit →
   `createOrder` (loading state na przycisku) → push `/zamowienie/sukces` +
-  `clear()`. Mono note „Płatności Stripe — wkrótce. To zamówienie testowe."
-- **/zamowienie/sukces** — order id, serif podziękowanie, kroki „co dalej",
+  `clear()`. Mono note „Płatności Stripe - wkrótce. To zamówienie testowe."
+- **/zamowienie/sukces** - order id, serif podziękowanie, kroki „co dalej",
   CTA powrotu. Reads orderId from searchParam.
-- **/o-nas** — story palarni (3 sekcje z parallax), timeline 2019→2026, wartości.
-- **/dostawa-i-zwroty** — accordion FAQ + tabela kosztów (InPost 12,99 zł,
+- **/o-nas** - story palarni (3 sekcje z parallax), timeline 2019→2026, wartości.
+- **/dostawa-i-zwroty** - accordion FAQ + tabela kosztów (InPost 12,99 zł,
   kurier 16,99 zł, darmowa od 149 zł).
-- **/kontakt** — mock form + dane palarni (adres, godziny — mono table).
-- **not-found** — 404 „Ta kawa się wylała", CTA home. Styled, split heading.
+- **/kontakt** - mock form + dane palarni (adres, godziny - mono table).
+- **not-found** - 404 „Ta kawa się wylała", CTA home. Styled, split heading.
 
 ## 12. Quality bar
 
@@ -265,5 +271,5 @@ Do NOT edit files you don't own. Import across boundaries per contracts above.
 - Każdy interaktywny element: focus-visible ring (gold), aria-labels.
 - `prefers-reduced-motion` respected by EVERY animation.
 - Three.js only via dynamic import on home (keep other routes light).
-- Metadata per page (title template `%s — Craft Coffee` in layout), PL lang.
+- Metadata per page (title template `%s - Craft Coffee` in layout), PL lang.
 - Server components by default; `'use client'` only where needed.
