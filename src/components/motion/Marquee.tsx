@@ -10,7 +10,7 @@ interface MarqueeProps {
 /**
  * Pure-CSS marquee: content duplicated, track translates −50%.
  * Animation is disabled under prefers-reduced-motion (globals.css).
- * Server component — no JS shipped.
+ * Server component - no JS shipped.
  */
 export function Marquee({ children, speed = 28, className }: MarqueeProps) {
   return (

@@ -6,7 +6,7 @@ import MarqueeDivider from "@/components/home/MarqueeDivider";
 import ProcessStory from "@/components/home/ProcessStory";
 
 /**
- * Home — Craft Coffee. Server component composing the six sections:
+ * Home - Craft Coffee. Server component composing the six sections:
  * hero (3D), marquee divider, bestsellers, pinned process story,
  * counters, closing CTA. Metadata comes from the root layout default.
  */

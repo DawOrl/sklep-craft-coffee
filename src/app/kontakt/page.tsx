@@ -9,7 +9,7 @@ import ContactForm from "./ContactForm";
 export const metadata: Metadata = {
   title: "Kontakt",
   description:
-    "Skontaktuj się z palarnią Craft Coffee — ul. Spokojna 12, 30-001 Kraków. Piszemy i odbieramy od poniedziałku do piątku, 8:00–16:00.",
+    "Skontaktuj się z palarnią Craft Coffee: ul. Spokojna 12, 30-001 Kraków. Piszemy i odbieramy od poniedziałku do piątku, 8:00–16:00.",
 };
 
 const ROASTERY_ROWS: { label: string; value: string; href?: string }[] = [
@@ -24,8 +24,8 @@ const ROASTERY_ROWS: { label: string; value: string; href?: string }[] = [
 ];
 
 const HOURS: { days: string; hours: string }[] = [
-  { days: "Poniedziałek — piątek", hours: "8:00 — 16:00" },
-  { days: "Sobota", hours: "10:00 — 14:00" },
+  { days: "Poniedziałek–piątek", hours: "8:00–16:00" },
+  { days: "Sobota", hours: "10:00–14:00" },
   { days: "Niedziela", hours: "zamknięte" },
 ];
 
@@ -36,7 +36,7 @@ export default function KontaktPage() {
       <section className="pt-32 pb-16 md:pt-44 md:pb-20">
         <Container>
           <p className="text-gold mb-5 font-mono text-[11px] uppercase tracking-[0.2em]">
-            Kontakt — Kraków
+            Kontakt / Kraków
           </p>
           <SplitHeading
             as="h1"
@@ -47,7 +47,7 @@ export default function KontaktPage() {
           <Reveal delay={0.3} className="mt-8 max-w-2xl">
             <p className="text-latte text-base leading-relaxed md:text-lg">
               Pytanie o ziarno, współpraca dla kawiarni, a może po prostu chcesz
-              zajrzeć do palarni? Napisz — odpowiadamy w 24 godziny.
+              zajrzeć do palarni? Napisz, odpowiadamy w 24 godziny.
             </p>
           </Reveal>
         </Container>
@@ -60,7 +60,7 @@ export default function KontaktPage() {
             {/* Mock form */}
             <div>
               <p className="text-gold font-mono text-[11px] uppercase tracking-[0.2em]">
-                01 — Formularz
+                01 / Formularz
               </p>
               <h2 className="font-display text-crema mt-4 text-2xl font-light md:text-3xl">
                 Napisz do nas
@@ -73,7 +73,7 @@ export default function KontaktPage() {
             {/* Roastery data */}
             <div>
               <p className="text-gold font-mono text-[11px] uppercase tracking-[0.2em]">
-                02 — Palarnia
+                02 / Palarnia
               </p>
               <h2 className="font-display text-crema mt-4 text-2xl font-light md:text-3xl">
                 Gdzie nas znajdziesz
@@ -116,7 +116,7 @@ export default function KontaktPage() {
 
               <Reveal delay={0.1} className="mt-10">
                 <h3 className="text-latte font-mono text-[11px] uppercase tracking-[0.2em]">
-                  Odbiór osobisty — godziny
+                  Odbiór osobisty: godziny
                 </h3>
                 <dl className="border-line mt-5 border-t">
                   {HOURS.map((row) => (
@@ -133,7 +133,7 @@ export default function KontaktPage() {
                 </dl>
                 <p className="text-latte mt-6 text-sm leading-relaxed">
                   Kawę zamówioną online odbierzesz w palarni bez kosztów
-                  dostawy — daj nam tylko znać w wiadomości, kiedy wpadniesz.
+                  dostawy. Daj nam tylko znać w wiadomości, kiedy wpadniesz.
                 </p>
               </Reveal>
             </div>

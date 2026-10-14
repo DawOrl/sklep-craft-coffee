@@ -15,7 +15,7 @@ interface FormErrors {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
- * Mock contact form — no backend. Validates inline (Polish messages) and on
+ * Mock contact form - no backend. Validates inline (Polish messages) and on
  * success swaps to an inline confirmation state.
  */
 export function ContactForm() {
@@ -49,7 +49,7 @@ export function ContactForm() {
           Wiadomość wysłana
         </p>
         <p className="font-display text-crema mt-5 text-2xl leading-snug font-light md:text-3xl">
-          Dziękujemy — odpowiemy w 24 godziny
+          Dziękujemy. Odpowiemy w 24 godziny
         </p>
         <p className="text-latte mt-4 text-sm leading-relaxed md:text-base">
           Kopia wiadomości trafiła na adres {email.trim()}. Piszemy od

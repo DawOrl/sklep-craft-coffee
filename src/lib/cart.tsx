@@ -88,7 +88,7 @@ function loadFromStorage(): CartItem[] {
       }
     }
   } catch {
-    // Corrupted/unavailable storage — start with an empty cart.
+    // Corrupted/unavailable storage - start with an empty cart.
   }
   return EMPTY_ITEMS;
 }
@@ -119,7 +119,7 @@ function setStoreItems(update: (prev: CartItem[]) => CartItem[]): void {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   } catch {
-    // Storage unavailable (private mode / quota) — cart stays in memory.
+    // Storage unavailable (private mode / quota) - cart stays in memory.
   }
   for (const listener of storeListeners) listener();
 }

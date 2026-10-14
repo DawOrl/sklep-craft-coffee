@@ -34,11 +34,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s — Craft Coffee",
-    default: "Craft Coffee — rzemieślnicza palarnia kawy",
+    template: "%s | Craft Coffee",
+    default: "Craft Coffee: rzemieślnicza palarnia kawy",
   },
   description:
-    "Kawa specialty palona w małych seriach. Single origin z Etiopii, Kolumbii i Kenii oraz autorskie mieszanki — od wypału do wysyłki w 48 godzin.",
+    "Kawa specialty palona w małych seriach. Single origin z Etiopii, Kolumbii i Kenii oraz autorskie mieszanki. Od wypału do wysyłki w 48 godzin.",
 };
 
 export default function RootLayout({
@@ -51,7 +51,7 @@ export default function RootLayout({
       lang="pl"
       className={`${fraunces.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      {/* min-h-svh (not %-based) — Lenis sets html height:auto, which would
+      {/* min-h-svh (not %-based) - Lenis sets html height:auto, which would
           collapse a percentage min-height chain and break the sticky footer. */}
       <body className="bg-espresso text-crema flex min-h-svh flex-col font-sans">
         <CartProvider>

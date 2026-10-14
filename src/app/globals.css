@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Craft Coffee — "Dark Roast Editorial"
+   Craft Coffee - "Dark Roast Editorial"
    Design tokens per DESIGN.md §2/§3. Do not add other colors.
    ============================================================ */
 
@@ -111,7 +111,7 @@ html.lenis body {
 }
 
 /* ============================================================
-   Grain overlay — fixed full-screen feTurbulence film
+   Grain overlay - fixed full-screen feTurbulence film
    (mounted once in layout; below custom cursor at z-50)
    ============================================================ */
 
@@ -127,7 +127,7 @@ html.lenis body {
 }
 
 /* ============================================================
-   View Transitions — keep header anchored, honor reduced motion
+   View Transitions - keep header anchored, honor reduced motion
    ============================================================ */
 
 ::view-transition-group(site-header) {
@@ -135,7 +135,7 @@ html.lenis body {
 }
 
 /* ============================================================
-   Reduced motion — kill CSS-driven animation (GSAP handled via
+   Reduced motion - kill CSS-driven animation (GSAP handled via
    gsap.matchMedia in motion components)
    ============================================================ */
 

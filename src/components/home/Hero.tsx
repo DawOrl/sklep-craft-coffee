@@ -6,14 +6,14 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 
 /**
- * Section 1 — full-viewport hero with the 3D bean field in the background,
+ * Section 1 - full-viewport hero with the 3D bean field in the background,
  * split serif headline and a magnetic CTA. Server component; all motion
  * lives in the imported client primitives.
  */
 export function Hero() {
   return (
     <section className="relative flex min-h-svh flex-col justify-center overflow-hidden">
-      {/* warm halo behind the bean field — lifts the beans off the dark bg */}
+      {/* warm halo behind the bean field - lifts the beans off the dark bg */}
       <div
         aria-hidden="true"
         className="absolute inset-0"
@@ -38,7 +38,7 @@ export function Hero() {
       <Container className="relative z-10 pt-28 pb-32 md:pt-32">
         <Reveal y={20}>
           <p className="text-gold font-mono text-[11px] uppercase tracking-[0.2em] md:text-xs">
-            Palarnia rzemieślnicza — od 2019
+            Palarnia rzemieślnicza / od 2019
           </p>
         </Reveal>
 
@@ -54,7 +54,7 @@ export function Hero() {
           <p className="text-latte mt-8 max-w-xl text-base leading-relaxed md:text-lg">
             Ziarna specialty z małych farm, palone u nas w seriach po
             kilkanaście kilogramów. Od wypału do wysyłki mija najwyżej 48
-            godzin — resztę poczujesz w filiżance.
+            godzin. Resztę poczujesz w filiżance.
           </p>
         </Reveal>
 

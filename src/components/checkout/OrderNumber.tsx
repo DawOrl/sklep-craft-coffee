@@ -12,7 +12,7 @@ export function OrderNumber() {
 
   return (
     <p className="text-latte font-mono text-[11px] uppercase tracking-[0.2em]">
-      Numer zamówienia <span className="text-gold">{nr ?? "—"}</span>
+      Numer zamówienia <span className="text-gold">{nr ?? "brak"}</span>
     </p>
   );
 }

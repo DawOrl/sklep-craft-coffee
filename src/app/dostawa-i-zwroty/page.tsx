@@ -23,12 +23,12 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: "Kiedy wyślecie moją kawę?",
     answer:
-      "Każde zamówienie pakujemy maksymalnie 48 godzin od wypału — palimy na bieżąco, kilka razy w tygodniu. Zamówienia złożone do 12:00 zwykle opuszczają palarnię tego samego lub następnego dnia roboczego.",
+      "Każde zamówienie pakujemy maksymalnie 48 godzin od wypału. Palimy na bieżąco, kilka razy w tygodniu. Zamówienia złożone do 12:00 zwykle opuszczają palarnię tego samego lub następnego dnia roboczego.",
   },
   {
     question: "Czy mogę śledzić przesyłkę?",
     answer:
-      "Tak. Gdy paczka opuści palarnię, wyślemy Ci e-mail z numerem przesyłki i linkiem do śledzenia na stronie przewoźnika — InPost lub DPD.",
+      "Tak. Gdy paczka opuści palarnię, wyślemy Ci e-mail z numerem przesyłki i linkiem do śledzenia na stronie przewoźnika: InPost lub DPD.",
   },
   {
     question: "Jak mogę zwrócić zamówienie?",
@@ -38,12 +38,12 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: "Czy mogę zwrócić otwartą kawę?",
     answer:
-      "Otwarta kawa to produkt spożywczy, więc nie podlega standardowemu zwrotowi. Jeśli jednak coś jest nie tak z wypałem albo paczka dotarła uszkodzona — napisz do nas. Zawsze znajdziemy rozwiązanie.",
+      "Otwarta kawa to produkt spożywczy, więc nie podlega standardowemu zwrotowi. Jeśli jednak coś jest nie tak z wypałem albo paczka dotarła uszkodzona, napisz do nas. Zawsze znajdziemy rozwiązanie.",
   },
   {
     question: "Czy mogę zmienić adres po złożeniu zamówienia?",
     answer:
-      "Tak, o ile paczka nie opuściła jeszcze palarni. Napisz jak najszybciej na hello@craftcoffee.pl, podając numer zamówienia i nowy adres — zaktualizujemy etykietę przed nadaniem.",
+      "Tak, o ile paczka nie opuściła jeszcze palarni. Napisz jak najszybciej na hello@craftcoffee.pl, podając numer zamówienia i nowy adres, a zaktualizujemy etykietę przed nadaniem.",
   },
   {
     question: "Jak pakujecie kawę?",
@@ -59,7 +59,7 @@ export default function DostawaIZwrotyPage() {
       <section className="pt-32 pb-16 md:pt-44 md:pb-20">
         <Container>
           <p className="text-gold mb-5 font-mono text-[11px] uppercase tracking-[0.2em]">
-            Informacje — wysyłka
+            Informacje / wysyłka
           </p>
           <SplitHeading
             as="h1"
@@ -69,7 +69,7 @@ export default function DostawaIZwrotyPage() {
           </SplitHeading>
           <Reveal delay={0.3} className="mt-8 max-w-2xl">
             <p className="text-latte text-base leading-relaxed md:text-lg">
-              Świeżość traktujemy dosłownie — Twoja kawa opuszcza palarnię
+              Świeżość traktujemy dosłownie: Twoja kawa opuszcza palarnię
               najpóźniej 48 godzin po wypale. Poniżej wszystko o kosztach,
               terminach i zwrotach.
             </p>
@@ -81,7 +81,7 @@ export default function DostawaIZwrotyPage() {
       <section className="border-line border-t py-20 md:py-28">
         <Container>
           <SectionHeading
-            eyebrow="01 — KOSZTY DOSTAWY"
+            eyebrow="01 / Koszty dostawy"
             title={
               <>
                 Ile kosztuje <em>wysyłka</em>
@@ -152,7 +152,7 @@ export default function DostawaIZwrotyPage() {
       <section className="border-line border-t py-20 md:py-28">
         <Container>
           <SectionHeading
-            eyebrow="02 — NAJCZĘSTSZE PYTANIA"
+            eyebrow="02 / Najczęstsze pytania"
             title={
               <>
                 Masz <em>pytania</em>? Mamy odpowiedzi
@@ -171,7 +171,7 @@ export default function DostawaIZwrotyPage() {
               >
                 hello@craftcoffee.pl
               </a>{" "}
-              — odpowiadamy w 24 godziny, od poniedziałku do piątku.
+              Odpowiadamy w 24 godziny, od poniedziałku do piątku.
             </p>
           </Reveal>
         </Container>

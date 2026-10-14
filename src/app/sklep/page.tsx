@@ -46,7 +46,7 @@ export default function SklepPage() {
             Nasze kawy
           </SplitHeading>
           <p className="text-latte mt-5 max-w-xl text-base leading-relaxed md:text-lg">
-            Dziesięć kaw, jeden standard — świeży wypał w małych seriach.
+            Dziesięć kaw, jeden standard: świeży wypał w małych seriach.
             Filtruj według palenia i rodzaju, a resztę zostaw ziarnu.
           </p>
         </header>

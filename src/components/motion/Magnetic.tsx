@@ -12,7 +12,7 @@ interface MagneticProps {
 }
 
 /**
- * Magnetic hover wrapper — content is pulled toward the cursor.
+ * Magnetic hover wrapper - content is pulled toward the cursor.
  * Active only on `(hover: hover) and (pointer: fine)` without reduced motion.
  */
 export function Magnetic({ children, strength = 0.35, className }: MagneticProps) {

@@ -95,7 +95,7 @@ export function Footer() {
               Newsletter
             </h2>
             <p className="text-latte mt-5 text-sm leading-relaxed">
-              Świeże wypały i nowości — raz w miesiącu, bez spamu.
+              Świeże wypały i nowości. Raz w miesiącu, bez spamu.
             </p>
             <div className="mt-5 flex items-center gap-2">
               <label htmlFor="newsletter-email" className="sr-only">
@@ -120,7 +120,7 @@ export function Footer() {
 
         {/* Small print */}
         <div className="border-line text-latte flex flex-col gap-3 border-t pt-8 font-mono text-[10px] uppercase tracking-[0.2em] md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Craft Coffee — projekt demonstracyjny</p>
+          <p>© 2026 Craft Coffee / projekt demonstracyjny</p>
           <p>Palone w Krakowie · 100% arabica</p>
         </div>
       </Container>

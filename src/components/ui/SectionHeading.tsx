@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import SplitHeading from "@/components/motion/SplitHeading";
 
 interface SectionHeadingProps {
-  /** Mono gold uppercase eyebrow, e.g. "01 — BESTSELLERY". */
+  /** Mono gold uppercase eyebrow, e.g. "01 / BESTSELLERY". */
   eyebrow?: string;
   /** Serif title; may contain <em> for italic accent words. */
   title: ReactNode;

@@ -10,7 +10,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 export const metadata: Metadata = {
   title: "Zamówienie przyjęte",
   description:
-    "Dziękujemy za zamówienie — Twoja kawa trafia do palenia i wyruszy do Ciebie w 48 godzin.",
+    "Dziękujemy za zamówienie. Twoja kawa trafia do palenia i wyruszy do Ciebie w 48 godzin.",
 };
 
 const STEPS = [
@@ -27,7 +27,7 @@ const STEPS = [
   {
     nr: "03",
     title: "Wysyłka w 48 h",
-    copy: "Paczka opuszcza palarnię najpóźniej 48 godzin od wypału — numer śledzenia dostaniesz e-mailem.",
+    copy: "Paczka opuszcza palarnię najpóźniej 48 godzin od wypału. Numer śledzenia dostaniesz e-mailem.",
   },
 ] as const;
 

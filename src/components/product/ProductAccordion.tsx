@@ -11,7 +11,7 @@ const PROCESS_LABELS: Record<NonNullable<Product["process"]>, string> = {
 
 function originBody(product: Product): string {
   if (product.kind === "mieszanka") {
-    return `Mieszanka ziaren: ${product.origin}. Każdy komponent palimy osobno i łączymy dopiero po wypale — tak pilnujemy powtarzalności profilu. Od wypału do wysyłki mijają maksymalnie 48 godzin.`;
+    return `Mieszanka ziaren: ${product.origin}. Każdy komponent palimy osobno i łączymy dopiero po wypale. Tak pilnujemy powtarzalności profilu. Od wypału do wysyłki mijają maksymalnie 48 godzin.`;
   }
   const sentences = [
     `Single origin: ${product.origin}${product.region ? `, region ${product.region}` : ""}.`,
@@ -25,7 +25,7 @@ function originBody(product: Product): string {
     );
   }
   sentences.push(
-    "Palimy w małych seriach — od wypału do wysyłki mijają maksymalnie 48 godzin.",
+    "Palimy w małych seriach: od wypału do wysyłki mijają maksymalnie 48 godzin.",
   );
   return sentences.join(" ");
 }
@@ -33,9 +33,9 @@ function originBody(product: Product): string {
 function brewBody(roast: Product["roast"]): string {
   switch (roast) {
     case "jasne":
-      return "Najlepiej pokazuje się w metodach przelewowych — V60, Chemex albo Aeropress. Zacznij od 6 g kawy na 100 ml wody o temperaturze 92–94°C i miel tuż przed parzeniem.";
+      return "Najlepiej pokazuje się w metodach przelewowych: V60, Chemex albo Aeropress. Zacznij od 6 g kawy na 100 ml wody o temperaturze 92–94°C i miel tuż przed parzeniem.";
     case "średnie":
-      return "Kawa uniwersalna — zaparzysz ją dripem, w kawiarce i w ekspresie ciśnieniowym. Zacznij od 6 g na 100 ml wody w przelewie albo od przelicznika 1:2 w espresso, a potem dostosuj do swojego smaku.";
+      return "Kawa uniwersalna: zaparzysz ją dripem, w kawiarce i w ekspresie ciśnieniowym. Zacznij od 6 g na 100 ml wody w przelewie albo od przelicznika 1:2 w espresso, a potem dostosuj do swojego smaku.";
     case "ciemne":
       return "Stworzona do espresso i french pressa. W espresso zacznij od przelicznika 1:2 i 25–28 sekund ekstrakcji, w prasie daj jej pełne cztery minuty. Mleko bardzo ją lubi.";
   }

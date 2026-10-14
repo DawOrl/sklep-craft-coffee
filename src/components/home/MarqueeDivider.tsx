@@ -3,7 +3,7 @@ import Marquee from "@/components/motion/Marquee";
 const ITEMS = ["Świeży wypał", "100% arabica", "Specialty", "Małe serie"];
 
 /**
- * Section 2 — editorial marquee divider between the hero and bestsellers.
+ * Section 2 - editorial marquee divider between the hero and bestsellers.
  * Pure CSS (server component); animation disabled under reduced motion.
  */
 export function MarqueeDivider() {

@@ -46,7 +46,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // While the menu is open: scroll lock (Lenis paused — overflow:hidden alone
+  // While the menu is open: scroll lock (Lenis paused - overflow:hidden alone
   // does not stop its programmatic scrolling), Esc closes, focus moves into
   // the menu and Tab is trapped within the header; focus returns to the
   // hamburger on close.
@@ -116,7 +116,7 @@ export function Header() {
         <Link
           href="/"
           className="font-display text-crema text-xl tracking-tight md:text-2xl"
-          aria-label="Craft Coffee — strona główna"
+          aria-label="Craft Coffee: strona główna"
         >
           Craft <span className="text-gold italic">Coffee</span>
         </Link>
@@ -147,7 +147,7 @@ export function Header() {
           <button
             type="button"
             onClick={openDrawer}
-            aria-label={`Otwórz koszyk — ${count} szt.`}
+            aria-label={`Otwórz koszyk, ${count} szt.`}
             className="border-line text-crema hover:border-gold hover:text-gold flex h-10 items-center gap-2.5 rounded-full border px-4 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200 motion-reduce:transition-none"
           >
             Koszyk
@@ -207,7 +207,7 @@ export function Header() {
             </Link>
           ))}
           <p className="text-latte mt-10 font-mono text-[10px] uppercase tracking-[0.2em]">
-            Palarnia rzemieślnicza — od 2019
+            Palarnia rzemieślnicza / od 2019
           </p>
         </nav>
       </div>
